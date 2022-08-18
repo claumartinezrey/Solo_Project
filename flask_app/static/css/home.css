@@ -1,0 +1,62 @@
+
+.calendar-container{
+    text-align: center;
+}
+
+.calendar_style{
+    display: flex;
+    justify-content: center;
+}
+
+tr {
+    width: 1000px;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+td, th {
+    justify-content: center;
+}
+
+#select_workout {
+    margin-top: 15px;
+    width: 140px;
+    display: block;
+    text-align: left;
+}
+
+
+.workout_per_day_container {
+    display: block;
+}
+
+.my_workout_form {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+button{
+    background-color: rgb(44, 48, 59);
+    color: rgb(200, 200, 36);
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.form_row{
+    margin-bottom: 10px;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+select {
+    width: 120px;
+    height: 25px;
+    border: 2px solid rgb(81, 87, 101); 
+    border-radius: 8px;
+}

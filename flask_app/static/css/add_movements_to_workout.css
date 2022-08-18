@@ -1,0 +1,72 @@
+#movements_section_container {
+    text-align: center;
+
+}
+
+#movement_info {
+    max-width: 600px;
+    margin: auto;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgb(81, 87, 101); 
+}
+
+#view_movements{
+    max-width: 600px;
+    margin: auto;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgb(81, 87, 101);
+}
+
+th, td {
+    width: 300px;
+    text-align: center;
+}
+
+
+
+#movements_container {
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgb(81, 87, 101);
+}
+
+.movements{
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.my_inputs {
+    width: 250px;
+    display: flex;
+    justify-content: space-around;
+}
+
+select {
+    width: 120px;
+    height: 25px;
+    border: 2px solid rgb(81, 87, 101); 
+    border-radius: 8px;
+}
+
+
+input {
+    width: 60px;
+    height: 25px;
+    border: 2px solid rgb(81, 87, 101); 
+    border-radius: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+button{
+    background-color: rgb(44, 48, 59);
+    color: rgb(200, 200, 36);
+    width: 90px;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 15px;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/my_movements_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/header.css') }}">
+    <title>View My Movement</title>
+    <script>
+        function showForm(divId, element){
+            let form_div = document.getElementById(divId)
+
+            form_div.style.display = 'block'
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="logout">
+            <p> <a href="/logout" >Logout</a></p>
+        </div>
+        <div>
+            <h1>View My Movements</h1>
+        </div>
+        <div>
+            <p> <a href="/success">Home</a> | <a href="/workouts" >My Workouts</a> | <a href="/movements">My Movements</a> | <a href="/account">My Account</a> </p>
+        </div>
+    </div>
+    
+
+    <div class="movement_container">
+        <div class="view_movements_container">
+            <h2>{{movement.name}}</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Movement Name</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr>
+                        <td> {{ movement.name }}</td>
+                        <td> {{ movement.description }}</td>
+                        <td> <a style="color:black; cursor: pointer;" onclick="showForm('edit_movement_form', this)">Edit</a> | <a style="color:black" href="/movements/{{movement.id}}/delete" >Delete</a> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="edit_movement_form" style="display: none;">
+        <form action="/movements/{{movement.id}}/update" method="post">
+            <input name="id" value="{{movement.id}}" type="hidden">
+            {% with messages = get_flashed_messages(category_filter=['update_movement_error']) %}
+                {% if messages %}
+                <script>
+                    showForm('edit_movement_form')
+                </script>
+                <div id="new_movement_warning"> 
+                    {% for message in messages %}
+                        <p style="color: red;" >{{ message }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endwith %}
+            <div class="form_row">
+                <label name="name">Movement Name: </label>
+            </div>
+            <div class="form_row">
+                <input type="text" name="name" value="{{movement.name}}">
+            </div>
+            
+            <div class="form_row">
+                <label name="description">Description: </label>
+            </div>
+            <div class="form_row">
+                <textarea name="description" id="" cols="30" rows="5" > {{movement.description}}</textarea>
+            </div>
+            <button onclick="window.location.href='/movements/{{movement.id}}/update'" type="submit">Update</button>
+        </form>
+    </div>
+
+</body>
+</html>

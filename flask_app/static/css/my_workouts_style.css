@@ -1,0 +1,100 @@
+/* CSS USED TO STYLE THE FOLLOWING HTML FILES: 
+MY_WORKOUTS.HTML
+VIEW_WORKOUT.HTML
+*/
+
+.my_workouts_container{
+    max-width: 800px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.view_workouts_container {
+    margin-top: 15px;
+    max-width: 400px;
+    justify-content: center;
+
+}
+.add_workout_container {
+    margin-top: 15px;
+    border-left: solid 2px rgb(81, 87, 101);
+    max-width: 400px;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+.form_style {
+    display: block;
+}
+.form_row{
+    margin-bottom: 10px;
+}
+
+input {
+    width: 250px;
+    height: 25px;
+    border: 2px solid rgb(81, 87, 101); 
+    border-radius: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+textarea {
+    width: 252px;
+    border: 2px solid rgb(81, 87, 101); 
+    border-radius: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+button{
+    background-color: rgb(44, 48, 59);
+    color: rgb(200, 200, 36);
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+table{
+    border-collapse: collapse;
+}
+tr {
+    width: 250px;
+    height: 23px;
+    border-bottom: 1px solid rgb(81, 87, 101); 
+}
+
+th {
+    width: 150px;
+    text-align: center;
+}
+
+td {
+    width: 150px;
+    text-align: center;
+}
+
+
+/* VIEW_WORKOUT.HTML STYLING */
+
+.workout_info {
+    display: flex;
+    justify-content: center;
+}
+
+.movements_info {
+    display: flex;
+    justify-content: center;
+}
+
+#edit_workout_form {
+    margin-top: 30px;
+    border-top: 1px solid rgb(81, 87, 101); 
+    text-align: center;
+}

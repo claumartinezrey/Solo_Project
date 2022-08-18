@@ -1,0 +1,143 @@
+/* CSS USED TO STYLE EDIT LOGIN, REGISTRATION AND SUCCESS PAGE */
+/* CSS USED TO STYLE TOP PART OF SUCCESS, NEW SIGHTING, EDIT SIGHTING AND VIEW SIGHTING PAGE */
+
+/* STYLING LOGING AND REGISTRATION PAGE */
+#main_container{
+    max-width: 800px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+#registration_container, #login_container{
+    width: 300px;
+    background-color: rgb(44, 48, 59);
+    padding: 20px;
+}
+
+.register_p{
+    color: rgb(200, 200, 36);
+    font-size: 200%;
+    font-weight: bold;
+}
+
+.login_p{
+    color: rgb(200, 200, 36);
+    font-size: 200%;
+    font-weight: bold;
+}
+
+#registration_container div, #login_container div{
+    margin-bottom: 10px;
+}
+
+#registration_container input, #login_container input{
+    width: 95%;
+    height: 23px;
+    border-radius: 5px;
+}
+
+#register_button button{
+    background-color: rgb(200, 200, 36);
+    color: white;
+    height: 30px;
+    width: 80px;
+    border-radius: 5px;
+}
+
+#login_button button{
+    background-color: rgb(200, 200, 36);
+    color: white;
+    height: 30px;
+    width: 60px;
+    border-radius: 5px;
+}
+
+#register_warning, #login_warning{
+    background-color: rgb(231, 188, 195);
+    color: rgb(107, 3, 3);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+
+/* STYLING TOP PART OF SUCCESS, NEW SIGHTING, EDIT SIGHTING AND VIEW SIGHTING PAGE */
+#success_page, #new_sighting_container, .top_container, #edit_sighting_container, #view_sighting_page{
+    max-width: 900px;
+    margin: auto;
+
+}
+
+.header_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title_container{
+    width: 500px;
+}
+
+.header_links{
+    max-width: 900px;
+    display: flex;
+    justify-content: end;
+    margin-bottom: 10px;
+}
+
+#top_button{
+    width: 150px;
+    height: 35px;
+    border-radius: 3px;
+    background-color: rgb(163, 163, 50);
+    color: white;
+}
+
+#logout_button{
+    width: 100px;
+    height: 35px;
+    border-radius: 3px;
+    background-color: rgb(163, 163, 50);
+    color: white;
+}
+
+/* STYLING SIGHTINGS TABLE */
+.bottom_container{
+    max-width: 700px;
+    margin: auto;
+}
+
+#info_container{
+    max-width: 500px;
+    margin: auto;
+}
+
+.new_row{
+    width: 600px;
+    display: flex;
+    justify-content: space-between;
+    border-top: solid 2px;
+}
+
+.new_row_left{
+    width: 300px;
+}
+
+.new_row_right{
+    max-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row_buttons{
+    width: 70px;
+    height: 25px;
+    margin-left: 10px;
+}
+
+#sightings_table tr{
+    border-top: solid 2px gray;
+    border-bottom: solid 2px gray;
+}
+

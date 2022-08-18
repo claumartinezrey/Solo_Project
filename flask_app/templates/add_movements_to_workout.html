@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/add_movements_to_workout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/header.css') }}">
+    <title>Add Movements to your Workout</title>
+    <script>
+        function showDiv(div1Id, div2Id, element) {
+            let reps_div = document.getElementById(div1Id)
+            let time_div = document.getElementById(div2Id)
+
+            if (element.value == "reps") {
+                reps_div.style.display = 'inline'
+            }
+            else {
+                reps_div.style.display = 'none'
+            }
+
+            if (element.value == "time") {
+                time_div.style.display = 'inline'
+            }
+            else {
+                time_div.style.display = 'none'
+            }
+        }
+
+        function addAnotherMovement(divId, sectionId) {
+            let movementsContainer = document.getElementById(divId);
+            let movementsSection = document.getElementById(sectionId);
+
+            movementsContainer.append(movementsSection.cloneNode(true));
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="logout">
+            <p> <a href="/logout" >Logout</a></p>
+        </div>
+        <div>
+            <h1>Add Movements to your Workout</h1>
+        </div>
+        <div>
+            <p> <a href="/success">Home</a> | <a href="/workouts" >My Workouts</a> | <a href="/movements">My Movements</a> | <a href="/account">My Account</a> </p>
+        </div>
+    </div>
+    
+    <div>
+        <div id="movements_section_container">
+            <h2>{{ workout.name }}</h2>
+            <div id="movement_info">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Workout Name:</th>
+                            <td>{{ workout.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Workout Description:</th>
+                            <td>{{ workout.description }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="view_movements"> 
+                <h3>Movements:</h3>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Reps/Time</th>
+                            <th>Exercise/Movement</th>
+                            <th>Actions</th>
+                        </tr>
+                        {% for one_movement in movements_completed %}
+                        <tr>
+                            {% if one_movement.reps == true %}
+                                <td>{{ one_movement.reps_amount }} Reps</td>
+                                <td> {{ one_movement.name }}</td>
+                                <td ><a href="/movements_completed/{{workout.id}}/{{one_movement.id}}/delete" style="color:black">Delete</a></td>
+                            {% else %}
+                                {% if one_movement.minutes < 1 %}
+                                    <td>{{ one_movement.seconds }} Secs</td>
+                                    <td> {{ one_movement.name }}</td>
+                                    <td ><a href="/movements_completed/{{workout.id}}/{{one_movement.id}}/delete" style="color:black">Delete</a></td>
+                                {% else %}
+                                    {% if one_movement.seconds < 1 %}
+                                        <td>{{ one_movement.minutes }} Mins</td>
+                                        <td> {{ one_movement.name }}</td>
+                                        <td > <a href="/movements_completed/{{workout.id}}/{{one_movement.id}}/delete" style="color:black">Delete</a></td>  
+                                    {% else %}
+                                        <td>{{ one_movement.minutes }} Mins & {{ one_movement.seconds }} Secs</td>
+                                        <td> {{ one_movement.name }}</td>
+                                        <td ><a href="/movements_completed/{{workout.id}}/{{one_movement.id}}/delete" style="color:black">Delete</a></td> 
+                                    {% endif %} 
+                                {% endif %}
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+
+
+
+
+
+            <div id="add_movements_container">
+                <h3>Here you can add movements to your workout:</h3>
+                <form action="/workouts/{{workout.id}}/add_movements/save" method="post">
+                    {% with messages = get_flashed_messages(category_filter=['new_movement_completed_error']) %}
+                        {% if messages %}
+                        <div id="new_workout_warning"> 
+                            {% for message in messages %}
+                                <p style="color: red;" >{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    {% endwith %}
+                    <input type="hidden" name="workout_id" value=" {{ workout.id }}">
+                    <section id="movements_section">
+                    <div id="movements_container">
+                        
+                        <div class="movements">
+                            <div class="reps_or_time">
+                                <select name="reps" id="reps" onchange="showDiv('reps_option', 'time_option', this)">
+                                    <option>-</option>
+                                    <option value="reps">By Reps</option>
+                                    <option value="time">By Time</option>
+                                </select>
+                            </div>
+                            <div class="selections_container">
+                                <select name="name">
+                                    <option>-</option>
+                                    {% for one_movement in all_movements %}
+                                    <option value="{{one_movement.name }}"> {{ one_movement.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="my_inputs">
+                            <div id="reps_option" style="display: none;">
+                                <label for="reps_amount">Amount:</label>
+                                <input type="number" name="reps_amount" class="movement_input">
+                            </div>
+                            <div id="time_option" style="display: none;">
+                                <label for="minutes">mm:</label>
+                                <input type="number" name="minutes" class="movement_input" value="0">
+                                <label for="seconds">ss:</label>
+                                <input type="number" name="seconds" class="movement_input" value="0">
+                            </div>
+                        </div>
+                        <button href="/workouts/{{workout.id}}/add_movements/save" type="submit">Save</button>
+                    </div>
+                    </section>
+                        
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

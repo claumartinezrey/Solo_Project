@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/my_workouts_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/header.css') }}">
+    <title>My Workouts</title>
+</head>
+<body>
+    <div class="header">
+        <div class="logout">
+            <p> <a href="/logout" >Logout</a></p>
+        </div>
+        <div>
+            <h1>My Workouts</h1>
+        </div>
+        <div>
+            <p> <a href="/success">Home</a> | <a href="/workouts" >My Workouts</a> | <a href="/movements">My Movements</a> | <a href="/account">My Account</a> </p>
+        </div>
+    </div>
+
+    <div class="my_workouts_container">
+        <div class="view_workouts_container">
+            <h2>My Workouts</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Workout Name</th>
+                        <th>Actions</th>
+                    </tr>
+                    {% for one_workout in workouts %}
+                    <tr>
+                        <td> {{ one_workout.name }}</td>
+                        <td> <a style="color:black" href="/workouts/{{one_workout.id}}/view" >View</a> | <a style="color:black" href="/workouts/{{one_workout.id}}/delete" >Delete</a> </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="add_workout_container">
+            <h2>Create a Workout</h2>
+            <form action="/workouts/save" method="post">
+                {% with messages = get_flashed_messages(category_filter=['new_workout_error']) %}
+                    {% if messages %}
+                    <div id="new_workout_warning"> 
+                        {% for message in messages %}
+                            <p style="color: red;" >{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endwith %}
+                <div class="form_row">
+                    <label name="name">Workout Name: </label>
+                </div>
+                <div class="form_row">
+                    <input type="text" name="name">
+                </div>
+                
+                <div class="form_row">
+                    <label name="description">Description: </label>
+                </div>
+                <div class="form_row">
+                    <textarea name="description" id="" cols="30" rows="5"></textarea>
+                </div>
+                <p>Note: You will be able to add exercices/movements after saving your workout.</p>
+                <button onclick="window.location.href='/workouts/save'" type="submit">Save</button>
+            </form>
+        </div>
+
+</body>
+</html>

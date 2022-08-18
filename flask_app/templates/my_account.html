@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/my_account.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/header.css') }}">
+    <title>My Account</title>
+</head>
+<body>
+    <div class="header">
+        <div class="logout">
+            <p> <a href="/logout" >Logout</a></p>
+        </div>
+        <div>
+            <h1>My Account</h1>
+        </div>
+        <div>
+            <p> <a href="/success">Home</a> | <a href="/workouts" >My Workouts</a> | <a href="/movements">My Movements</a> | <a href="/account">My Account</a> </p>
+        </div>
+    </div>
+    <div class="account_info_container">
+        <table>
+            <tbody>
+                <tr>
+                    <th>First Name: </th>
+                    <td>{{ user.first_name }}</td>
+                </tr>
+                <tr>
+                    <th>Last Name: </th>
+                    <td>{{ user.last_name }}</td>
+                </tr>
+                <tr>
+                    <th>Email: </th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Movements Created: </th>
+                    <td>{{ movements_sum }}</td>
+                </tr>
+                <tr>
+                    <th>Workouts Created: </th>
+                    <td>{{workouts_sum}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="button_container">
+            <button onclick="window.location.href='/account/edit'">Edit</button>
+        </div>
+    </div>    
+</body>
+</html>
+
+
+

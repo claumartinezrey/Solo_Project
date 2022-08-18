@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main_container">
+        <div id="registration_container">
+            <p class="register_p">Register</p>
+            <form action="/register" method="post">
+                {% with messages = get_flashed_messages(category_filter=['register_error']) %}
+                    {% if messages %}
+                    <div id="register_warning"> 
+                        <p>Flash AHHHHHHHH!!!!</p>
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endwith %}
+                <div>
+                    <label for="first_name" style="color: white;">First Name: </label>
+                </div>
+                <div>
+                    <input type="text" name="first_name">
+                </div>
+                <div>
+                    <label for="last_name" style="color: white;">Last Name:</label>
+                </div>
+                <div>
+                    <input type="text" name="last_name">
+                </div>
+                <div>
+                    <label for="email" style="color: white;">Email:</label>
+                </div>
+                <div>
+                    <input type="text" name="email">
+                </div>
+                <div>
+                    <label for="password" style="color: white;">Password:</label>
+                </div>
+                <div>
+                    <input type="password" name="password">
+                </div>
+                <div>
+                    <label for="confirm_password" style="color: white;">Confirm Password:</label>
+                </div>
+                <div>
+                    <input type="password" name="confirm_password">
+                </div>
+                <div id="register_button">
+                    <button href="/register" type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+        <div id="login_container">
+            <form action="/login" method="post">
+                <p class="login_p">Login</p>
+                {% with messages = get_flashed_messages(category_filter=['login_error']) %}
+                    {% if messages %}
+                    <div id="login_warning"> 
+                        <p>Flash AHHHHHHHH!!!!</p>
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endwith %}
+                <div>
+                    <label for="email" style="color: white;">Email:</label>
+                </div>
+                <div>
+                    <input type="text" name="email">
+                </div>
+                <div>
+                    <label for="password" style="color: white;">Password:</label>
+                </div>
+                <div>
+                    <input type="password" name="password">
+                </div>
+                <div id="login_button">
+                    <button href="/login" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

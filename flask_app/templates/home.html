@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/header.css') }}">
+    <title>Home</title>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logout">
+            <p> <a href="/logout" >Logout</a></p>
+        </div>
+        <div>
+            <h1>Welcome {{user.first_name}}</h1>
+        </div>
+        <div>
+            <p> <a href="/success">Home</a> | <a href="/workouts" >My Workouts</a> | <a href="/movements">My Movements</a> | <a href="/account">My Account</a> </p>
+        </div>
+    </div>
+
+
+
+    <div class="calendar-container">
+        <div>
+            <h3> This week's workouts</h3>
+        </div>
+        <div class="calendar_style">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                        <th>Sunday</th>
+                    </tr>
+                    <tr style="height: 80px">
+                        <td>
+                            <div class="workout_per_day_style">
+                                {% if monday != '' %}
+                                    <p>{{ monday }}</p>
+                                    <a style="color: rgb(200, 200, 36); cursor: pointer;" href="/success/workout_completed/Monday/delete">Delete</a>
+                                {% else %}
+                                    <p>{{ monday }}</p>
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="workout_per_day_style">
+                                {% if tuesday != '' %}
+                                    <p>{{ tuesday }}</p>
+                                    <a style="color: rgb(200, 200, 36); cursor: pointer;" href="/success/workout_completed/Tuesday/delete">Delete</a>
+                                {% else %}
+                                    <p>{{ tuesday }}</p>
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="workout_per_day_style">
+                                {% if wednesday != '' %}
+                                    <p>{{ wednesday }}</p>
+                                    <a style="color: rgb(200, 200, 36); cursor: pointer;" href="/success/workout_completed/Wednesday/delete">Delete</a>
+                                {% else %}
+                                    <p>{{ wednesday }}</p>
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="workout_per_day_style">
+                                {% if thursday != '' %}
+                                    <p>{{ thursday }}</p>
+                                    <a style="color: rgb(200, 200, 36); cursor: pointer;" href="/success/workout_completed/Thursday/delete">Delete</a>
+                                {% else %}
+                                    <p>{{ thursday }}</p>
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="workout_per_day_style">
+                                {% if friday != '' %}
+                                    <p>{{ friday }}</p>
+                                    <a style="color: rgb(200, 200, 36); cursor: pointer;" href="/success/workout_completed/Friday/delete">Delete</a>
+                                {% else %}
+                                    <p>{{ friday }}</p>
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="workout_per_day_style">
+                                {% if saturday != '' %}
+                                    <p>{{ saturday }}</p>
+                                    <a style="color: rgb(200, 200, 36); cursor: pointer;" href="/success/workout_completed/Saturday/delete">Delete</a>
+                                {% else %}
+                                    <p>{{ saturday }}</p>
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="workout_per_day_style">
+                                {% if sunday != '' %}
+                                    <p>{{ sunday }}</p>
+                                    <a style="color: rgb(200, 200, 36); cursor: pointer;" href="/success/workout_completed/Sunday/delete">Delete</a>
+                                {% else %}
+                                    <p>{{ sunday }}</p>
+                                {% endif %}
+                            </div>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    
+    <div class="my_workout_form">
+        
+        <form action="/success/add_workout_completed/save" method="post"> 
+            <h3>Add a workout to your calendar:</h3>
+            {% with messages = get_flashed_messages(category_filter=['new_workout_completed_error']) %}
+                {% if messages %}
+                <div id="new_workout_warning"> 
+                    {% for message in messages %}
+                        <p style="color: red;" >{{ message }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endwith %}
+            <input type="hidden" name="user_id" value="{{ user.id }}">
+            <div class="form_row">
+                <label for="day">Day of the week:</label>
+                <select name="day">
+                    <option>-</option>
+                    <option>Monday</option>
+                    <option>Tuesday</option>
+                    <option>Wednesday</option>
+                    <option>Thursday</option>
+                    <option>Friday</option>
+                    <option>Saturday</option>
+                    <option>Sunday</option>
+                </select>
+            </div>
+            <div class="form_row">
+                <label for="workout_name">Select a workout:</label>
+                <select name="workout_name">
+                    <option>-</option>
+                    {% for one_workout in all_workouts %}
+                        <option value="{{one_workout.name }}"> {{ one_workout.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <input type="hidden" name="completed" value="0">
+            </div>
+            <button onclick="window.location.href='/success/add_workout_completed/save'" type="submit">Save</button>
+        </form>
+    </div>
+</body>
+</html>

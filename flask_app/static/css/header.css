@@ -1,0 +1,29 @@
+body{
+    background-color: rgb(237, 238, 242);
+}
+
+.header{
+    background-color: rgb(44, 48, 59);
+    color: rgb(200, 200, 36);
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.logout {
+    text-align: end;
+    padding-right: 50px;
+    padding-top: 10px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    color: rgb(200, 200, 36);
+}

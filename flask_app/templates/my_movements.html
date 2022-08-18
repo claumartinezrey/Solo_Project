@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/my_movements_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/header.css') }}">
+    <title>My Movements</title>
+</head>
+<body>
+    <div class="header">
+        <div class="logout">
+            <p> <a href="/logout" >Logout</a></p>
+        </div>
+        <div>
+            <h1>My Movements</h1>
+        </div>
+        <div>
+            <p> <a href="/success">Home</a> | <a href="/workouts" >My Workouts</a> | <a href="/movements">My Movements</a> | <a href="/account">My Account</a> </p>
+        </div>
+    </div>
+    
+
+    <div class="my_movements_container">
+        <div class="view_movements_container">
+            <h2>My Movements</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Movement Name</th>
+                        <th>Actions</th>
+                    </tr>
+                    {% for one_movement in movements %}
+                    <tr>
+                        <td> {{ one_movement.name }}</td>
+                        <td> <a style="color:black" href="/movements/{{one_movement.id}}/view" >View</a> | <a style="color:black" href="/movements/{{one_movement.id}}/delete" >Delete</a> </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="add_movement_container" >
+            <h2>Add a Movement</h2>
+            <form action="/movements/save" method="post">
+                {% with messages = get_flashed_messages(category_filter=['new_movement_error']) %}
+                    {% if messages %}
+                    <div id="new_movement_warning"> 
+                        {% for message in messages %}
+                            <p style="color: red;" >{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endwith %}
+                <div class="form_row">
+                    <label name="name">Movement Name: </label>
+                </div>
+                <div class="form_row">
+                    <input type="text" name="name">
+                </div>
+                
+                <div class="form_row">
+                    <label name="description">Description: </label>
+                </div>
+                <div class="form_row">
+                    <textarea name="description" id="" cols="30" rows="5"></textarea>
+                </div>
+                <button onclick="window.location.href='/movements/save'" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
